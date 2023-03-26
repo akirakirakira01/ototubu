@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Ototubu extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['music','artist','url','content'];
+
+    /**
+     * この投稿を所有するユーザ。（ Userモデルとの関係を定義）
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

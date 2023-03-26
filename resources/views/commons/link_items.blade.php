@@ -1,6 +1,8 @@
 @if (Auth::check())
+    {{-- ユーザ一覧ページへのリンク --}}
+    <li><a class="link link-hover" href="{{ route('users.index') }}">Users</a></li>
     {{-- マイページへのリンク --}}
-    <li><a class="link link-hover" href="#">my page</a></li>
+    <li><a class="link link-hover" href="{{ route('users.show', Auth::user()->id) }}">my page</a></li>
     <li class="divider lg:hidden"></li>
     {{-- 投稿ページへのリンク --}}
     <li><a class="link link-hover" href="#">投稿</a></li>

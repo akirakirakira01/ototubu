@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController; 
+use App\Http\Controllers\OtotubusController; 
 
 
 /*
@@ -20,12 +21,15 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::get('',function() {
-    return view();
-});
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+/*投稿フォームへのルーティング
+Route::get('',function() {
+    return view();
+});*/
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -34,3 +38,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('users', UsersController::class, ['only' => ['index', 'show']]);
+    Route::resource('ototubus', OtotubusController::class, ['only' => ['store', 'destroy']]);
+});
