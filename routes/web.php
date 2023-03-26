@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController; 
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,9 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
+Route::get('',function() {
+    return view();
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
