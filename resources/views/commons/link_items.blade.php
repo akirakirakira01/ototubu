@@ -5,7 +5,7 @@
     <li><a class="link link-hover" href="{{ route('users.show', Auth::user()->id) }}">my page</a></li>
     <li class="divider lg:hidden"></li>
     {{-- 投稿ページへのリンク --}}
-    <li><a class="link link-hover" href="#">投稿</a></li>
+    <li><a class="link link-hover" href="form">投稿ページ</a></li>
     {{-- ログアウトへのリンク --}}
     <li><a class="link link-hover" href="#" onclick="event.preventDefault();this.closest('form').submit();">Logout</a></li>
 @else

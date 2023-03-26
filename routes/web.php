@@ -17,18 +17,12 @@ use App\Http\Controllers\OtotubusController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/', [OtotubusController::class, 'index']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [OtotubusController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
-/*投稿フォームへのルーティング
-Route::get('',function() {
-    return view();
-});*/
+//投稿フォームへのルーティング
+Route::get('/form', [OtotubusController::class, 'form']);
 
 
 Route::middleware('auth')->group(function () {
