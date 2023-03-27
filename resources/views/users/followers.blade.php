@@ -6,11 +6,13 @@
             {{-- ユーザ情報 --}}
             @include('users.card')
         </aside>
-    <div class="sm:col-span-2 mt-4">
-            {{-- タブ --}}  
+        <div class="sm:col-span-2 mt-4">
+            {{-- タブ --}}
             @include('users.navtabs')
-            {{-- 投稿一覧 --}}
-            @include('ototubus.ototubus')
+            <div class="mt-4">
+                {{-- ユーザ一覧 --}}
+                @include('users.users')
+            </div>
         </div>
     </div>
 @endsection

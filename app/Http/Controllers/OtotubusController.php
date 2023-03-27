@@ -14,7 +14,7 @@ class OtotubusController extends Controller
             // 認証済みユーザを取得
             $user = \Auth::user();
             // ユーザの投稿の一覧を作成日時の降順で取得
-            $ototubus = $user->ototubus()->orderBy('created_at', 'desc')->paginate(10);
+            $ototubus = $user->feed_ototubus()->orderBy('created_at', 'desc')->paginate(10);
             $data = [
                 'user' => $user,
                 'ototubus' => $ototubus,
