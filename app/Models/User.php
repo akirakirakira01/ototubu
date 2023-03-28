@@ -49,7 +49,7 @@ class User extends Authenticatable
      
      public function loadRelationshipCounts()
     {
-        $this->loadCount('ototubus','followings', 'followers');
+        $this->loadCount('ototubus','followings', 'followers','favorites');
     }
     
       /**
@@ -109,9 +109,40 @@ class User extends Authenticatable
     {
         // このユーザがフォロー中のユーザのidを取得して配列にする
         $userIds = $this->followings()->pluck('users.id')->toArray();
-        // このユーザのidもその配列に追加
-        $userIds[] = $this->id;
         // それらのユーザが所有する投稿に絞り込む
         return Ototubu::whereIn('user_id', $userIds);
+    }
+    
+    public function favorites(){
+        return $this->belongsToMany(Ototubu::class, 'favorites', 'user_id', 'ototubu_id')->withTimestamps();
+    }
+    
+    public function favorite($ototubuId)
+    {
+        $exist = $this->is_favorite($ototubuId);
+        
+        if ($exist) {
+            return false;
+        } else {
+            $this->favorites()->attach($ototubuId);
+            return true;
+        }
+    }
+    
+    public function unfavorite($ototubuId)
+    {
+        $exist = $this->is_favorite($ototubuId);
+        
+        if ($exist) {
+            $this->favorites()->detach($ototubuId);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function is_favorite($ototubuId)
+    {
+        return $this->favorites()->where('ototubu_id', $ototubuId)->exists();
     }
 }

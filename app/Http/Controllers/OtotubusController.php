@@ -14,7 +14,7 @@ class OtotubusController extends Controller
             // 認証済みユーザを取得
             $user = \Auth::user();
             // ユーザの投稿の一覧を作成日時の降順で取得
-            $ototubus = $user->feed_ototubus()->orderBy('created_at', 'desc')->paginate(10);
+            $ototubus = Ototubu::orderBy('created_at', 'desc')->paginate(10);
             $data = [
                 'user' => $user,
                 'ototubus' => $ototubus,
@@ -67,6 +67,24 @@ class OtotubusController extends Controller
     public function form()
     {
          return view('ototubus.form');
+    }
+    
+    public function follow_ototubus()
+    {
+        if (\Auth::check()) { // 認証済みの場合
+            // 認証済みユーザを取得
+            $user = \Auth::user();
+            // ユーザとフォロー中ユーザの投稿の一覧を作成日時の降順で取得
+            $ototubus = $user->feed_ototubus()->orderBy('created_at', 'desc')->paginate(10);
+
+                
+        }
+        
+        // dashboardビューでそれらを表示
+        return view('users.follow_ototubus', [
+            'user' => $user,
+            'ototubus' => $ototubus
+                ]);
     }
 }
 

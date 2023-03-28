@@ -18,13 +18,24 @@
                         <div>
                             {{-- 投稿内容 --}}
                             <ul class="mb-0">
-                                <li>{!! $ototubu->music !!}</li>
-                                <li>{!! $ototubu->artist !!}</li>
-                                <li>{!! $ototubu->url !!}</li>
-                                <li>{!! $ototubu->content !!}</li>
+                                
+                                <li>曲名「{!! $ototubu->music !!}」</li>
+                                <li>アーティスト名「{!! $ototubu->artist !!}」</li>
+                                <div class="flex">
+                                <li>
+                                    <iframe width="300" height="169" src="{!! $ototubu->url !!}" title="YouTube video player"
+                                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </li>
+                               
+                                <li>コメント「{!! $ototubu->content !!}」</li>
+                                 </div>
                             </ul>
+                           
                         </div>
+                        
                         <div>
+                             @include ('user_favorite.favorite_button')
                             @if (Auth::id() == $ototubu->user_id)
                                 {{-- 投稿削除ボタンのフォーム --}}
                                 <form method="POST" action="{{ route('ototubus.destroy', $ototubu->id) }}">
