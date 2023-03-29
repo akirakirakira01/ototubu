@@ -24,7 +24,7 @@ Route::get('/', [OtotubusController::class, 'index']);
 Route::get('/dashboard', [OtotubusController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 //投稿フォームへのルーティング
-Route::get('/form', [OtotubusController::class, 'form']);
+Route::get('/form', [OtotubusController::class, 'form'])->name('form');
 
 Route::get('/ototubus',[UsersController::class,'all_show'])->name('users.all_show');
 

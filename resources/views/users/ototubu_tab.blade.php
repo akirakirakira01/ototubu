@@ -1,4 +1,4 @@
-<div class="tabs">
+<div class="tabs bg-gray-300">
     {{-- Ototubu一覧タブ --}}
     <a href="{{ route('dashboard') }}" class="tab tab-lifted grow {{ Request::routeIs('dashboard') ? 'tab-active' : '' }}">
         TimeLine
