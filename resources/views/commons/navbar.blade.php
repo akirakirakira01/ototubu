@@ -2,7 +2,7 @@
     <nav class="navbar bg-green-400 text-white">
         {{-- トップページへのリンク --}}
         <div class="flex-1">
-            <h1><a class="btn btn-ghost normal-case text-xl" href="/">Ototubu</a></h1>
+            <h1><a class="btn btn-ghost normal-case text-xl" href="{{ route('dashboard') }}">Ototubu</a></h1>
         </div>
 
         <div class="flex-none">

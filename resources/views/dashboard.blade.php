@@ -2,10 +2,12 @@
 
 @section('content')
     @if (Auth::check())
-        <div class="sm:grid sm:grid-cols-3 sm:gap-10">
+        
+        <div>
             {{-- タブ --}}
             @include('users.ototubu_tab')
-            <div class="sm:col-span-2">
+             
+            <div>
                 {{-- 投稿一覧 --}}
                 @include('users.all_ototubus')
             </div>

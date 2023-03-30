@@ -21,13 +21,13 @@ use App\Http\Controllers\FavoritesController;  // 追記
 
 Route::get('/', [OtotubusController::class, 'index']);
 
-Route::get('/dashboard', [OtotubusController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('dashboard', [OtotubusController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 //投稿フォームへのルーティング
 Route::get('/form', [OtotubusController::class, 'form'])->name('form');
 
 Route::get('/ototubus',[UsersController::class,'all_show'])->name('users.all_show');
-
+ Route::get('search',[OtotubusController::class,'search'])->name('search');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('favorites', [UsersController::class, 'favorites'])->name('users.favorites');
         Route::get('favorites2', [UsersController::class, 'favorites2'])->name('users.favorites2');
         Route::get('follow_ototubus',[OtotubusController::class,'follow_ototubus'])->name('follow_ototubus');
+       
     });  
     Route::resource('users', UsersController::class, ['only' => ['index', 'show']]);
     Route::resource('ototubus', OtotubusController::class, ['only' => ['store', 'destroy']]);

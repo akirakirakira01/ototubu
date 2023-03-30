@@ -86,5 +86,46 @@ class OtotubusController extends Controller
             'ototubus' => $ototubus
                 ]);
     }
+    
+    public function search(Request $request)
+    {
+         $user = \Auth::user();
+        // ユーザー一覧をページネートで取得
+        $ototubus = Ototubu::paginate(20);
+        
+         // 検索フォームで入力された値を取得する
+        $search = $request->input('search');
+        
+         // クエリビルダ
+        $query = Ototubu::query();
+
+       // もし検索フォームにキーワードが入力されたら
+        if ($search) {
+
+        // 全角スペースを半角に変換
+            $spaceConversion = mb_convert_kana($search, 's');
+
+        // 単語を半角スペースで区切り、配列にする
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+
+
+        // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
+            foreach($wordArraySearched as $value) {
+                $query->where('music', 'like', '%'.$value.'%')
+                        ->orWhere('artist','like', '%'.$value.'%')
+                        ->orWhere('content','like', '%'.$value.'%');
+            }
+        
+        $ototubus = $query -> paginate(10);
+        }
+        
+        return view('users.result')
+            ->with([
+                'ototubus' => $ototubus,
+                'search' => $search,
+                'user' =>$user,
+            ]);
+    }
+
 }
 

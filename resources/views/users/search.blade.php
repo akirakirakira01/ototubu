@@ -1,9 +1,14 @@
-
-    @if (isset($ototubus))
+<h2>検索画面</h2>
+<form method="GET" action="{{ route('search') }}">
+    <input class="mt-5 w-1/2 border border-black" type="search" placeholder="曲名、アーティスト、コメントで検索" name="search" value="@if (isset($search)) {{ $search }} @endif">
+        <button class="btn btn-sm mt-4"type="submit">検索</button>
+        </button>
+</form>
+  @if (isset($ototubus))
             @foreach ($ototubus as $ototubu)
             
                     {{-- 投稿の所有者のメールアドレスをもとにGravatarを取得して表示 --}}
-                    <div class="avatar mt-4">
+                    <div class="avatar">
                         <div class="w-12 rounded">
                             <img src="{{ Gravatar::get($ototubu->user->email) }}" alt="" />
                         </div>
@@ -12,7 +17,7 @@
                             <a class="link link-hover text-info" href="{{ route('users.show', $ototubu->user->id) }}">{{ $ototubu->user->name }}</a>
                             <span class="text-muted text-gray-500">posted at {{ $ototubu->created_at }}</span>
                             {{-- 投稿内容 --}}
-                        <div class="sm:flex  items-center bg-white border border-gray-200 rounded-lg justify-content:flex-start shadow 
+                            <div class="flex items-center bg-white border border-gray-200 rounded-lg justify-content:flex-start shadow 
                             md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 
                             dark:hover:bg-gray-700">
                                 
@@ -35,23 +40,27 @@
                                     frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
                             </div>
-                                      <p class=" mb-3 font-normal w-1/2 inline-block text-gray-700 dark:text-gray-400"> {{ $ototubu->content  }}</p>
+                                      <p class="mb-3 font-normal w-1/2   text-gray-700 dark:text-gray-400"> {{ $ototubu->content  }}</p>
                             
-                            <div class="flex">
+                            <div class=" mt-4">
                              @include ('user_favorite.favorite_button')
                             @if (Auth::id() == $ototubu->user_id)
                                 {{-- 投稿削除ボタンのフォーム --}}
                                 <form method="POST" action="{{ route('ototubus.destroy', $ototubu->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn m-5 btn-error btn-sm" 
+                                    <button type="submit" class="btn btn-error btn-sm normal-case" 
                                         onclick="return confirm('Delete id = {{ $ototubu->id }} ?')">Delete</button>
                                 </form>
                             @endif
                             </div>
-                        </div>
+                            </div>
                             
             @endforeach
-        {{-- ページネーションのリンク --}}
-        {{ $ototubus->links() }}
-    @endif
+
+
+<div>
+    {{ $ototubus->appends(request()->input())->links() }}
+</div>
+
+@endif
