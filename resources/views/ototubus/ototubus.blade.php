@@ -12,8 +12,8 @@
                             <a class="link link-hover text-info" href="{{ route('users.show', $ototubu->user->id) }}">{{ $ototubu->user->name }}</a>
                             <span class="text-muted text-gray-500">posted at {{ $ototubu->created_at }}</span>
                             {{-- 投稿内容 --}}
-                        <div class="sm:flex  items-center bg-white border border-gray-200 rounded-lg justify-content:flex-start shadow 
-                            md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 
+                        <div class="sm:flex text-justify ms-10 items-center bg-white border border-gray-200 rounded-lg justify-content:flex-start shadow 
+                            md:flex-row  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 
                             dark:hover:bg-gray-700">
                                 
                             <div class="flex flex-col p-4 leading-normal">
@@ -35,19 +35,21 @@
                                     frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
                             </div>
-                                      <p class=" mb-3 font-normal w-1/2 inline-block text-gray-700 dark:text-gray-400"> {{ $ototubu->content  }}</p>
+                            <div class="flex-col ">
+                                      <p class="  mb-4 font-normal  pe-5 inline-block text-gray-700 dark:text-gray-400"> {{ $ototubu->content  }}</p>
                             
-                            <div class="flex">
+                            <div class="flex justify-start">
                              @include ('user_favorite.favorite_button')
                             @if (Auth::id() == $ototubu->user_id)
                                 {{-- 投稿削除ボタンのフォーム --}}
-                                <form method="POST" action="{{ route('ototubus.destroy', $ototubu->id) }}">
+                                <form method="POST" class="mt-5" action="{{ route('ototubus.destroy', $ototubu->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn m-5 btn-error btn-sm" 
+                                    <button type="submit" class="btn block  btn-error btn-sm normal-case" 
                                         onclick="return confirm('Delete id = {{ $ototubu->id }} ?')">Delete</button>
                                 </form>
                             @endif
+                            </div>
                             </div>
                         </div>
                             
