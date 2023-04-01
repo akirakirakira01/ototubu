@@ -25,7 +25,7 @@ class URL implements Rule
      */
     public function passes($attribute, $request)
     {
-        if(preg_match('^https://youtu.be/',$request->url)){
+        if(preg_match('^/https://youtu.be/',$request)){
             return true;
         }
         return false;
