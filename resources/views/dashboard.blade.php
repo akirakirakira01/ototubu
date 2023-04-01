@@ -2,16 +2,11 @@
 
 @section('content')
     @if (Auth::check())
-        
-        <div>
             {{-- タブ --}}
             @include('users.ototubu_tab')
              
-            <div>
                 {{-- 投稿一覧 --}}
                 @include('users.all_ototubus')
-            </div>
-        </div>
     @else
         <div class="prose hero bg-base-200 mx-auto max-w-full rounded">
             <div class="hero-content text-center my-10">

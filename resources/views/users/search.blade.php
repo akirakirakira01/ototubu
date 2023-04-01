@@ -4,7 +4,8 @@
         <button class="btn btn-sm mt-4"type="submit">検索</button>
         </button>
 </form>
-     @if (isset($ototubus))
+
+    @if (isset($ototubus))
             @foreach ($ototubus as $ototubu)
             
                     {{-- 投稿の所有者のメールアドレスをもとにGravatarを取得して表示 --}}
@@ -20,7 +21,7 @@
                         <div class="sm:flex text-justify ms-10 items-center bg-white border border-gray-200 rounded-lg justify-content:flex-start shadow 
                             md:flex-row  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 
                             dark:hover:bg-gray-700">
-
+                                
                             <div class="flex flex-col p-4 leading-normal">
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{!! $ototubu->artist !!}</h5>
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">「{!! $ototubu->music !!}」</h5>
@@ -39,8 +40,8 @@
                                     </iframe>
                             </div>
                             <div class="flex-col ">
-                                      <p class="  mb-4 font-normal  pe-5 inline-block text-gray-700 dark:text-gray-400"> {!! nl2br(e($ototubu->content)) !!}</p>
-
+                                      <p class="  mb-4 font-normal  pe-5 inline-block text-gray-700 dark:text-gray-400">{!! nl2br(e($ototubu->content)) !!}</p>
+                            
                             <div class="flex justify-start">
                              @include ('user_favorite.favorite_button')
                             @if (Auth::id() == $ototubu->user_id)
@@ -55,9 +56,11 @@
                             </div>
                             </div>
                         </div>
-
+                            
             @endforeach
-
+        {{-- ページネーションのリンク --}}
+        {{ $ototubus->links() }}
+    @endif
 
 <div>
     {{ $ototubus->appends(request()->input())->links() }}
