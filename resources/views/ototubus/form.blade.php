@@ -14,7 +14,7 @@
             </div>
             
              <div class="form-control mt-4">
-                <h3>動画URL</h3><textarea rows="2" name="url" class="input input-bordered w-full"></textarea>
+                <h3>動画URL(共有したい曲のYoutubeのURLを貼ってください)</h3><textarea rows="2" name="url" class="input input-bordered w-full"></textarea>
             </div>
             
             <div class="form-control mt-4">

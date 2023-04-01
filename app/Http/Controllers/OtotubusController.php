@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ototubu;
+use App\Rules\URL;
 
 class OtotubusController extends Controller
 {
@@ -31,7 +32,7 @@ class OtotubusController extends Controller
         $request->validate([
             'music' => 'required|max:255',
             'artist' => 'required|max:255',
-            'url' => 'required|max:255',
+            'url' => ['required','max:255',new URL],
             'content' => 'required|max:255',
         ]);
         
