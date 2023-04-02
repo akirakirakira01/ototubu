@@ -58,9 +58,6 @@
                         </div>
                             
             @endforeach
-        {{-- ページネーションのリンク --}}
-        {{ $ototubus->links() }}
-    @endif
 
 <div>
     {{ $ototubus->appends(request()->input())->links() }}
